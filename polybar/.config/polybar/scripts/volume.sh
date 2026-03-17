@@ -9,7 +9,7 @@ if [ "$MUTE" = "true" ]; then
 else
     # Check if we are using Headphones or Speakers
     if [ -n "$HP" ]; then
-        ICON=" 󰋋"
+        ICON=" "
     else
         # SPEAKER RAMPS (Your original icons)
         if [ "$VOL" -lt 30 ]; then
