@@ -64,4 +64,4 @@ chmod +x ~/.config/i3/*.sh
 ```
 ### Step 5: check i3 config file for keybinds
 
-#### Battery Script notes: This script is tuned for ```bash /sys/class/power_supply/```BAT0. If your hardware uses BAT1, update the path in ```bash ~/.config/polybar/scripts/battery_status.sh```.
+#### Battery Script notes: This script is tuned for ```/sys/class/power_supply/```BAT0. If your hardware uses BAT1, update the path in ```~/.config/polybar/scripts/battery_status.sh```.
