@@ -56,6 +56,7 @@ stow -v i3
 stow -v polybar
 stow -v kitty
 stow -v zsh
+stow -v picom
 ```
 ### Step 4: Fix permissions
 ```bash
