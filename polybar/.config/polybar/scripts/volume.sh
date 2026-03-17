@@ -5,21 +5,24 @@ MUTE=$(pamixer --get-mute)
 HP=$(pactl list sinks | grep -i "Active Port" | grep -i "headphone")
 
 if [ "$MUTE" = "true" ]; then
-    echo "%{F#FF0000}󰝟%{F-} Muted"
+    echo "  %{F#BF616A}󰝟%{F-}"
 else
     # Check if we are using Headphones or Speakers
     if [ -n "$HP" ]; then
-        ICON=" "
+        ICON="  "
     else
         # SPEAKER RAMPS (Your original icons)
         if [ "$VOL" -lt 30 ]; then
-            ICON=" "
+            ICON="  "
         elif [ "$VOL" -lt 70 ]; then
-            ICON=" "
+            ICON="  "
         else
-            ICON=" "
+            ICON="  "
         fi
     fi
     # Output with your Aqua color
     echo "%{F#7fbbb3}$ICON%{F-} $VOL%"
 fi
+
+
+#FF0000
