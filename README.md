@@ -1,6 +1,6 @@
 # 🐧 The Clean EliteBook Dotfiles
 
-This repository contains my personal Rice for a productivity-focused Linux setup. It is optimized for an HP EliteBook but works on most high-resolution laptops.
+This repository contains my first personal Rice for a productivity-focused Linux setup. It is optimized for an HP EliteBook but works on most high-resolution laptops.
 
 ## 🖼️ Preview
 > [!TIP]
