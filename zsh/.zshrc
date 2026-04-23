@@ -153,3 +153,6 @@ ZSH_HIGHLIGHT_STYLES[line]='red'
 
 export PATH=$PATH:/home/jesus/.spicetify
 export PATH=$PATH:$HOME/.spicetify
+
+# Silence ghost arandr calls
+alias arandr='arandr > /dev/null 2>&1'

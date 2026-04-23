@@ -28,11 +28,17 @@ for_window [class="^.*"] border pixel 0
 # This removes title bars from ALL windows
 default_border pixel 0
 default_floating_border pixel 0
+
+# Disable screen blanking and power management
+exec --no-startup-id xset s off
+exec --no-startup-id xset s noblank
+exec --no-startup-id xset -dpms
+
 # polybar set up
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-# picom set up
-exec --no-startup-id picom -b
+# picom set up - redirected to black hole for a clean boot
+exec --no-startup-id picom -b > /dev/null 2>&1
 
 # wallpaper set up
 exec_always --no-startup-id feh --bg-fill /home/jesus/Desktop/wallpapers/twokfrontcover.jpg
@@ -110,9 +116,13 @@ bindsym $mod+Shift+f exec nautilus ~/Documents
 # Open Stremio
 bindsym $mod+Shift+s exec flatpak run com.stremio.Stremio
 
+# Open Vesktop
+bindsym $mod+Shift+v exec --no-startup-id flatpak run dev.vencord.Vesktop
+
+
 # Open Spotify
 assign [title="SpotifyTUI"] 9
-bindsym $mod+p exec --no-startup-id kitty --title "SpotifyTUI" spotify_player
+bindsym $mod+p exec spotify
 
 # Open Zotero
 assign [class="Zotero"] 8
