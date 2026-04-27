@@ -1,68 +1,33 @@
-# 🐧 The Clean EliteBook Dotfiles
+# ⚡ THE GRID | DOTFILES
 
-This repository contains my first personal Rice for a productivity-focused Linux setup. It is optimized for an HP EliteBook but works on most high-resolution laptops.
+> **REPLICATION PROTOCOL:** ACTIVE  
+> **OPERATOR:** JESUS  
+> **SUBSTRATE:** UBUNTU / I3-GAPS
 
-## 🖼️ Preview
-> [!TIP]
-> This setup uses a "Dark Mode" aesthetic with high-contrast lime green accents for system status.
-
----
-
-## 🛠️ Core Dependencies
-
-To get this look on a fresh install, you need to install the following packages:
-
-### 1. The Basics (Window Manager & Terminal)
-* **i3-wm** (or `i3-gaps`)
-* **polybar** (Status bar)
-* **kitty** (The terminal)
-* **rofi** (Application launcher)
-* **picom** (For transparency/shadows)
-
-### 2. The Secret Sauce (Fonts & Icons)
-The bar and scripts will look like broken squares without these:
-* **JetBrainsMono Nerd Font** (The primary font)
-* **Font Awesome 6** (Optional, for extra glyphs)
-
-### 3. Shell & Utilities
-* **zsh** + **Oh My Zsh**
-* **stow** (For managing these dotfiles)
-* **bc** & **acpi** (Required for the battery scripts)
+This repository contains the neural maps for my workstation environment. It is designed for rapid deployment and total system restoration via the **Tether Protocol**.
 
 ---
 
-## 🚀 Quick Install
+## 🛰️ System Anatomy
+* **Window Manager:** i3-gaps (The Framework)
+* **Shell:** ZSH + Oh-My-Zsh (The Interface)
+* **Terminal:** Kitty (The Uplink)
+* **Launchers:** Rofi + Polybar (The HUD)
+* **Compositor:** Picom (The Optics)
 
-Follow these steps to replicate the setup on a fresh machine:
+---
 
-### Step 1: Clone the Repo
+## 🛠️ Restoration Sequence
+
+To replicate this environment on a fresh node, establish a local link and execute the master deployment script:
+
 ```bash
-cd ~
-git clone [https://github.com/RabanalGsus/dotfiles.git](https://github.com/RabanalGsus/dotfiles.git)
-cd dotfiles
-```
+# 1. Clone the repository
+git clone [https://github.com/YOUR_USERNAME/dotfiles.git](https://github.com/YOUR_USERNAME/dotfiles.git) ~/dotfiles
 
-### Step 2: Ubuntu/Debian
-```bash
-sudo apt update && sudo apt install stow -y
+# 2. Enter the directory
+cd ~/dotfiles
 
-# Arch
-sudo pacman -S stow
-```
-### Step 3: Symlink the configs
-#### Inside the dotfiles directory
-```bash
-stow -v i3
-stow -v polybar
-stow -v kitty
-stow -v zsh
-stow -v picom
-```
-### Step 4: Fix permissions
-```bash
-chmod +x ~/.config/polybar/scripts/*.sh
-chmod +x ~/.config/i3/*.sh
-```
-### Step 5: check i3 config file for keybinds
-
-#### Battery Script notes: This script is tuned for ```/sys/class/power_supply/```BAT0. If your hardware uses BAT1, update the path in ```~/.config/polybar/scripts/battery_status.sh```.
+# 3. Initialize the Grid Replication Protocol
+chmod +x scripts/stow_all.sh
+./scripts/stow_all.sh
