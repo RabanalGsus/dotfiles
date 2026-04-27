@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash 
 
 # ==============================================================================
 # SLICK FONT INSTALLER
@@ -14,9 +14,8 @@ NERD_FONTS=(
     "JetBrainsMono"
     "RobotoMono"
     "FiraCode"
-    "SauceCodePro"
+    "SourceCodePro"
     "UbuntuMono"
-    "FontAwesome"
     "NerdFontsSymbolsOnly"
 )
 
@@ -25,40 +24,51 @@ NERD_FONTS=(
 # SHINJI BLUES, Togalite, Material Icons
 # ==============================================================================
 
+# --- SYSTEM OPTICS INITIALIZATION ---
 VERSION="v3.1.1"
 FONT_DIR="$HOME/.local/share/fonts"
 mkdir -p "$FONT_DIR"
 
-echo "🚀 Starting installation of your Slick Font Collection..."
+# Color Matrix
+G='\033[0;32m' # Success Green
+R='\033[0;31m' # Critical Red
+C='\033[0;36m' # System Cyan
+NC='\033[0m'   # Override/Reset
 
-# Install Nerd Fonts
+echo -e "${C}[SYS] Initiating Typographic Acquisition Protocol v$VERSION...${NC}"
+echo -e "${C}[SYS] Targeting local repository: $FONT_DIR${NC}\n"
+
+# --- NERD FONT SIPHONING ---
 for font in "${NERD_FONTS[@]}"; do
-    echo "📦 Downloading Nerd Font: $font..."
+    echo -e "📡 [SYS] Siphoning Nerd Font Data-Glyphs: ${C}$font${NC}"
     zip_file="${font}.zip"
-    curl -fLo "$zip_file" "https://github.com/ryanoasis/nerd-fonts/releases/download/${VERSION}/${zip_file}"
     
-    if [ $? -eq 0 ]; then
-        unzip -o "$zip_file" -d "$FONT_DIR"
+    # 2>/dev/null silences the raw curl error message
+    if curl -# -fL "https://github.com/ryanoasis/nerd-fonts/releases/download/$VERSION/$zip_file" -o "$zip_file" 2>/dev/null; then
+        unzip -qo "$zip_file" -d "$FONT_DIR"
         rm "$zip_file"
-        echo "✅ Installed $font"
+        echo -e "   ${G}[✔]${NC} $font integration complete."
     else
-        echo "❌ Failed to download $font"
+        # CUSTOM SCIFI ERROR MESSAGE
+        echo -e "   ${R}[✘] UPLINK SEVERED: Sector 404 detected. Data-glyph '$font' is a ghost.${NC}"
     fi
+    echo ""
 done
 
-# Check for Manual Fonts
-echo "🔍 Checking for custom aesthetic fonts..."
+# --- SCANNING THE TYPOGRAPHIC MATRIX ---
+echo -e "${C}🔍 [SYS] Scanning local sectors for custom aesthetic fonts...${NC}"
 CUSTOM_FONTS=("SHINJI BLUES" "Togalite" "Material Icons")
+
 for f in "${CUSTOM_FONTS[@]}"; do
     if fc-list | grep -i "$f" >/dev/null; then
-        echo "✅ $f is already installed."
+        echo -e "   ${G}[✔]${NC} $f signature detected in system matrix."
     else
-        echo "⚠️  $f not found! Note: You'll need to manually download this one."
+        echo -e "   ${R}[!] WARNING: Asset '$f' missing from local storage. Manual extraction required.${NC}"
     fi
 done
 
-# Refresh cache
-echo "🔄 Refreshing font cache..."
-fc-cache -fv
+# --- FINAL INTEGRATION ---
+echo -e "\n${C}🔄 [SYS] Refreshing global font cache...${NC}"
+fc-cache -fv > /dev/null
 
-echo "✨ Done! Your system is now typographically superior."
+echo -e "\n${G}✨ [COMPLETED]${NC} Your system optics are now typographically superior."

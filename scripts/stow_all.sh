@@ -1,94 +1,108 @@
 #!/usr/bin/env bash
 
+# Color Matrix
+G='\033[0;32m' # Success Green
+R='\033[0;31m' # Critical Red
+C='\033[0;36m' # System Cyan
+NC='\033[0m'   # Override/Reset
+
 # --- THE STACK ---
-# The master list of required substrates
 APPS=(i3 polybar rofi picom kitty zsh feh stow curl unzip code)
 DOTFILES_DIR="$HOME/dotfiles"
 
 clear
-echo "████████████████████████████████████████████████████████████"
+echo -e "${C}████████████████████████████████████████████████████████████"
 echo "  > UPLINK ESTABLISHED. TERMINAL ACTIVE."
 echo "  > BOOTSTRAPPING USER ENVIRONMENT REPLICATION..."
-echo "████████████████████████████████████████████████████████████"
+echo -e "████████████████████████████████████████████████████████████${NC}"
 sleep 0.8
 
 # --- 1. HOST ANALYSIS ---
-echo -n "  [SYS] Scanning host substrate topology... "
+echo -ne "  ${C}[SYS]${NC} Scanning host substrate topology... "
 sleep 0.5
 if command -v pacman &> /dev/null; then
     INSTALLER="sudo pacman -S"
-    OS="ARCH_NEXUS"
+    OS="${C}ARCH_NEXUS${NC}"
 elif command -v apt &> /dev/null; then
     INSTALLER="sudo apt update && sudo apt install -y"
-    OS="DEBIAN_CORE"
+    OS="${C}DEBIAN_CORE${NC}"
 elif command -v dnf &> /dev/null; then
     INSTALLER="sudo dnf install -y"
-    OS="FEDORA_GRID"
+    OS="${C}FEDORA_GRID${NC}"
 else
     INSTALLER="echo 'CRITICAL: Fabricator unavailable. Manual sequence required:'"
-    OS="UNKNOWN_ANOMALY"
+    OS="${R}UNKNOWN_ANOMALY${NC}"
 fi
-echo "$OS"
+echo -e "$OS"
 echo ""
 sleep 0.4
 
 # --- 2. DEPENDENCY AUDIT ---
-echo "  [SYS] Pinging localized interface modules:"
+echo -e "  ${C}[SYS]${NC} Pinging localized interface modules:"
 MISSING_APPS=()
 for app in "${APPS[@]}"; do
-    # The sleep here creates a cool "scanning" effect in the terminal
     sleep 0.1 
     if ! command -v "$app" &> /dev/null; then
-        echo "      > $app ........................... [ OFFLINE ]"
+        echo -e "      > $app ........................... ${R}[ OFFLINE ]${NC}"
         MISSING_APPS+=("$app")
     else
-        echo "      > $app ........................... [ ACTIVE ]"
+        echo -e "      > $app ........................... ${G}[  ACTIVE  ]${NC}"
     fi
 done
 
 # --- 3. AUTO-FABRICATION ---
 if [ ${#MISSING_APPS[@]} -ne 0 ]; then
     echo ""
-    echo "  [WARN] Subsystem fragmentation detected. Missing dependencies:"
-    echo "         [ ${MISSING_APPS[*]} ]"
+    echo -e "  ${R}[WARN] Subsystem fragmentation detected. Missing dependencies:${NC}"
+    echo -e "         [ ${MISSING_APPS[*]} ]"
     echo ""
-    read -p "  [REQ] Authorize automated fabricator deployment? (y/n): " -n 1 -r
+    echo -ne "  ${C}[REQ]${NC} Authorize automated fabricator deployment? (y/n): "
+    read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "  [SYS] Routing power to package manager..."
+        echo -e "  ${C}[SYS]${NC} Routing power to package manager..."
         sleep 0.5
         eval $INSTALLER "${MISSING_APPS[@]}"
     else
-        echo "  [WARN] Override confirmed. Proceeding with degraded integrity."
+        echo -e "  ${R}[WARN] Override confirmed. Proceeding with degraded integrity.${NC}"
     fi
 fi
 
 # --- 4. THE SYNC (STOW) ---
 echo ""
-echo "  [SYS] Engaging molecular symlink protocol (STOW)..."
+echo -e "  ${C}[SYS] Engaging molecular symlink protocol (STOW)...${NC}"
 cd "$DOTFILES_DIR"
 
-# Handle existing config blockage
 if [ -f "$HOME/.zshrc" ] && [ ! -L "$HOME/.zshrc" ]; then
-    echo "  [SYS] Purging static shell config (.zshrc -> .zshrc.bak)"
+    echo -e "  ${C}[SYS]${NC} Purging static shell config (.zshrc -> .zshrc.bak)"
     mv "$HOME/.zshrc" "$HOME/.zshrc.bak"
 fi
 
-echo -n "  [SYS] Entangling local directories... "
+echo -ne "  ${C}[SYS]${NC} Entangling local directories... "
 stow i3 kitty misc picom polybar rofi zsh fonts
 sleep 0.8
-echo "SUCCESS."
+echo -e "${G}SUCCESS.${NC}"
 
-# --- 5. ASSET DEPLOYMENT ---
+# --- 5. ASSET DEPLOYMENT (TYPOGRAPHY SUITE) ---
 if [ -f "./scripts/install_fonts.sh" ]; then
-    echo "  [SYS] Decoding optical data-glyphs (Typography Suite)..."
+    echo -e "\n  ${C}[SYS] Decoding optical data-glyphs (Typography Suite)...${NC}"
     chmod +x ./scripts/install_fonts.sh
-    ./scripts/install_fonts.sh > /dev/null
+    
+    # Handover to sub-process HUD
+    ./scripts/install_fonts.sh
+    
+    if [ $? -eq 0 ]; then
+        echo -e "  ${G}[✔] Typography Suite integrated successfully.${NC}"
+    else
+        echo -e "  ${R}[✘] WARNING: Typography Suite deployment encountered anomalies.${NC}"
+    fi
+else
+    echo -e "  ${R}[✘] CRITICAL: Acquisition module './scripts/install_fonts.sh' not found.${NC}"
 fi
 
 echo ""
 sleep 0.5
-echo "████████████████████████████████████████████████████████████"
+echo -e "${G}████████████████████████████████████████████████████████████"
 echo "  > REPLICATION 100% COMPLETE."
 echo "  > ALL SECTORS NOMINAL. WELCOME TO THE GRID, OPERATOR."
-echo "████████████████████████████████████████████████████████████"
+echo -e "████████████████████████████████████████████████████████████${NC}"
