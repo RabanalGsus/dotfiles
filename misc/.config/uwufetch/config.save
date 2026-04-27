@@ -1,0 +1,14 @@
+distro=ubuntu
+e=/home/jesus/uwufetch/res/uwuntulogouwufetch.png
+user=true
+os=true
+host=true
+kernel=true
+cpu=true
+gpus=true
+ram=true
+resolution=true
+shell=false
+pkgs=false
+uptime=false
+colors=true
