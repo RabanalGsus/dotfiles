@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # --- THE STACK ---
-APPS=(i3 polybar rofi picom kitty zsh feh stow curl unzip)
+# The master list of required substrates
+APPS=(i3 polybar rofi picom kitty zsh feh stow curl unzip code)
 DOTFILES_DIR="$HOME/dotfiles"
 
 clear
