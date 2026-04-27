@@ -1,0 +1,14 @@
+@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Papirus";
+    drun-display-format: "{name}";
+    display-drun: " 󰀻  Apps ";
+}
+
+/* You can also add some styling for the icons here */
+element-icon {
+    size: 1.2em;
+    padding: 0 10px 0 0;
+}

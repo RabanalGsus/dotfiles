@@ -29,6 +29,14 @@ for_window [class="^.*"] border pixel 0
 default_border pixel 0
 default_floating_border pixel 0
 
+# --- Security & Keyring ---
+# Fixes the "sudo/password" nag in Spotify, Chrome, and VS Code
+# Start the GNOME Keyring daemon
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
+
+# Export the variables so apps can find the daemon
+exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY I3SOCK
+
 # Disable screen blanking and power management
 exec --no-startup-id xset s off
 exec --no-startup-id xset s noblank
@@ -96,7 +104,7 @@ bindsym $mod+Shift+w exec snap run whatsie
 bindsym $mod+Shift+b exec blueman-manager
 
 # Open Vivaldi
-bindsym $mod+b exec vivaldi --password-store=basic
+bindsym $mod+b exec vivaldi
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -119,10 +127,12 @@ bindsym $mod+Shift+s exec flatpak run com.stremio.Stremio
 # Open Vesktop
 bindsym $mod+Shift+v exec --no-startup-id flatpak run dev.vencord.Vesktop
 
+# Launch the App Hub
+bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # Open Spotify
-assign [title="SpotifyTUI"] 9
-bindsym $mod+p exec spotify
+assign [class="Spotify"] $ws9
+bindsym $mod+p exec spotify; workspace $ws9
 
 # Open Zotero
 assign [class="Zotero"] 8
@@ -131,8 +141,6 @@ bindsym $mod+Shift+z exec zotero
 # Open VScode
 bindsym $mod+c exec code -n
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
