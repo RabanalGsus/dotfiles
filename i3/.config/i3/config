@@ -30,12 +30,22 @@ default_border pixel 0
 default_floating_border pixel 0
 
 # --- Security & Keyring ---
-# Fixes the "sudo/password" nag in Spotify, Chrome, and VS Code
-# Start the GNOME Keyring daemon
+# 1. Initialize the vault daemon
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
 
+# 2. Broadcast environment variables to the system bus (CRITICAL FIX)
+# Using --all ensures GNOME_KEYRING_CONTROL and SSH_AUTH_SOCK are visible to Vivaldi
+exec --no-startup-id dbus-update-activation-environment --all
+exec --no-startup-id gnome-keyring-daemon --start --components=secrets
+
+
+# --- Security & Keyring ---
+# Fixes the "sudo/password" nag in Spotify, Chrome, and VS Code
+# Start the GNOME Keyring daemon
+#exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
+
 # Export the variables so apps can find the daemon
-exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY I3SOCK
+#exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY I3SOCK
 
 # Disable screen blanking and power management
 exec --no-startup-id xset s off
@@ -101,10 +111,10 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+w exec snap run whatsie
 
 # Open Bluetooth manager
-bindsym $mod+Shift+b exec blueman-manager
+bindsym $mod+b exec blueman-manager
 
 # Open Vivaldi
-bindsym $mod+b exec vivaldi
+bindsym $mod+v exec "export XDG_CURRENT_DESKTOP=GNOME; vivaldi-stable --password-store=gnome-libsecret"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -125,7 +135,7 @@ bindsym $mod+Shift+f exec nautilus ~/Documents
 bindsym $mod+Shift+s exec flatpak run com.stremio.Stremio
 
 # Open Vesktop
-bindsym $mod+Shift+v exec --no-startup-id flatpak run dev.vencord.Vesktop
+bindsym $mod+Shift+d exec --no-startup-id flatpak run dev.vencord.Vesktop
 
 # Launch the App Hub
 bindsym $mod+d exec --no-startup-id rofi -show drun
@@ -172,10 +182,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+Shift+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+Shift+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
