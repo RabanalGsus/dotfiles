@@ -120,7 +120,7 @@ bindsym $mod+v exec "export XDG_CURRENT_DESKTOP=GNOME; vivaldi-stable --password
 bindsym $mod+Shift+q kill
 
 # Open Steam
-bindsym $mod+m exec steam
+bindsym $mod+m exec steam --password-store=basic
 
 # Open thunderbird
 bindsym $mod+t exec thunderbird
@@ -142,7 +142,7 @@ bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # Open Spotify
 assign [class="Spotify"] $ws9
-bindsym $mod+p exec spotify; workspace $ws9
+bindsym $mod+p exec spotify --password-store=basic; workspace $ws9 
 
 # Open Zotero
 assign [class="Zotero"] 8
