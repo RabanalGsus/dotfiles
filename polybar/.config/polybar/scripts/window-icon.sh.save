@@ -38,7 +38,7 @@ case "$WM_CLASS" in
    *)
         ICON="" ;; # Default icon for unknown apps
 esac
-
+q
 # 4. Output the result
 # This is what Polybar will display
 echo "$ICON  $WM_TITLE"

@@ -23,6 +23,19 @@ font pango:monospace 8
 gaps inner 10
 gaps outer 5
 
+# Define your monitors based on xrandr output
+set $m_laptop eDP
+set $m_portable DisplayPort-0
+
+# Assign workspaces to specific monitors
+workspace 1 output $m_laptop
+workspace 2 output $m_laptop
+workspace 3 output $m_laptop
+
+workspace 8 output $m_portable
+workspace 9 output $m_portable
+workspace 10 output $m_portable
+
 # Remove title bars from all windows
 for_window [class="^.*"] border pixel 0
 # This removes title bars from ALL windows
@@ -114,7 +127,7 @@ bindsym $mod+Shift+w exec snap run whatsie
 bindsym $mod+b exec blueman-manager
 
 # Open Vivaldi
-bindsym $mod+v exec "export XDG_CURRENT_DESKTOP=GNOME; vivaldi-stable --password-store=gnome-libsecret"
+bindsym $mod+v exec "export XDG_CURRENT_DESKTOP=GNOME; vivaldi-stable --password-store=basic"
 
 # kill focused window
 bindsym $mod+Shift+q kill

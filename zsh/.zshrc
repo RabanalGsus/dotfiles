@@ -157,3 +157,5 @@ export PATH=$PATH:$HOME/.spicetify
 # Silence ghost arandr calls
 alias arandr='arandr > /dev/null 2>&1'
 alias dots='cd ~/dotfiles'
+
+export OPENCV_LOG_LEVEL=OFF
