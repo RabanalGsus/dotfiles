@@ -159,3 +159,6 @@ alias arandr='arandr > /dev/null 2>&1'
 alias dots='cd ~/dotfiles'
 
 export OPENCV_LOG_LEVEL=OFF
+
+# opencode
+export PATH=/home/jesus/.opencode/bin:$PATH
