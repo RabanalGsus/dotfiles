@@ -1,6 +1,6 @@
 # ==============================================================================
 # i3wm Configuration File (v4)
-# Optimized & Refactored
+# Optimized & Refactored for Arch Linux
 # ==============================================================================
 
 set $mod Mod4
@@ -17,8 +17,8 @@ default_floating_border pixel 0
 floating_modifier $mod
 tiling_drag modifier titlebar
 
-# --- Monitor Variables ---
-set $m_laptop eDP
+# --- Monitor Variables (Adjusted for Arch Linux Kernel) ---
+set $m_laptop eDP1
 set $m_portable DisplayPort-0
 
 # --- Workspace Definitions & Assignments ---
@@ -53,7 +53,7 @@ exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 
 # 3. Desktop Environment & Utilities
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec_always --no-startup-id feh --bg-fill /home/jesus/Desktop/wallpapers/twokfrontcover.jpg
+exec_always --no-startup-id feh --bg-fill /home/jesus/Desktop/wallpapers/twokwallpaper.jpg
 exec --no-startup-id picom -b > /dev/null 2>&1
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id tlp start
@@ -63,8 +63,8 @@ exec --no-startup-id xset s off
 exec --no-startup-id xset s noblank
 exec --no-startup-id xset -dpms
 
-# 5. Fix Logitech G305 Button Mapping
-exec_always --no-startup-id xinput set-button-map $(xinput list --id-only "pointer:Logitech G305") 1 2 3 4 5 6 7 8 0 10 11 12 13 14 15 16 17 18 19 20
+# 5. Fix Logitech G305 Button Mapping (Uses flexible matching string)
+exec_always --no-startup-id xinput set-button-map $(xinput list --id-only "pointer:Logitech G305*") 1 2 3 4 5 6 7 8 0 10 11 12 13 14 15 16 17 18 19 20
 
 # --- Hardware Media Bindings ---
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -74,23 +74,32 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86MonBrightnessUp exec brightnessctl set +5% -e 
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%- -e
 
+# Increase keyboard brightness
+bindsym XF86KbdBrightnessUp exec --no-startup-id brightnessctl --device='asus::kbd_backlight' set 1+
+
+# Decrease keyboard brightness
+bindsym XF86KbdBrightnessDown exec --no-startup-id brightnessctl --device='asus::kbd_backlight' set 1
+
+# Language Keyboard Distro Set-Up
+exec --no-startup-id setxkbmap -layout es,dk,gb -option grp:win_space_toggle
+
 # --- System & Window Management Shortcuts ---
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# --- Application Launchers & Bindings ---
+# --- Application Launchers & Bindings (Fixed Native Binaries for Arch) ---
 bindsym $mod+Return exec kitty
 bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+b exec blueman-manager
 bindsym Shift+Print exec --no-startup-id ~/.config/i3/screenshot.sh
 
 # Web & Communication
-bindsym $mod+v exec "export XDG_CURRENT_DESKTOP=GNOME; vivaldi-stable --password-store=basic"
-bindsym $mod+Shift+w exec snap run whatsie
+bindsym $mod+v exec "export XDG_CURRENT_DESKTOP=GNOME; vivaldi --password-store=basic"
+bindsym $mod+Shift+w exec flatpak run com.ktechpit.whatsie
 bindsym $mod+t exec thunderbird
-bindsym $mod+Shift+d exec --no-startup-id flatpak run dev.vencord.Vesktop
+bindsym $mod+Shift+d exec --no-startup-id vesktop
 
 # Files & Productivity
 bindsym $mod+Shift+f exec nautilus ~/Documents

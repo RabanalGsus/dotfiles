@@ -126,7 +126,7 @@ fpath+=~/.zfunc; autoload -Uz compinit; compinit
 export PATH="$PATH:/home/jesus/.local/bin"
 eval "$(starship init zsh)"
 cd ~/Desktop
-uwufetch -i /home/jesus/uwufetch/res/ubuntu.png
+uwufetch --image ~/.config/uwufetch/arch.png
 
 # pnpm
 export PNPM_HOME="/home/jesus/.local/share/pnpm"
@@ -147,7 +147,7 @@ alias ssk="kitten ssh"
 #xinput map-to-output 17 DisplayPort-0
 #xinput map-to-output 18 DisplayPort-0
 #Loading dynamic highlighting plugin
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(line brackets pattern cursor)
 ZSH_HIGHLIGHT_STYLES[line]='red'
 

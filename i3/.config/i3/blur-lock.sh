@@ -1,36 +1,27 @@
 #!/bin/bash
 
-# Matching your Aqua/Black/Yellow theme
-# Using #RRGGBBAA format (last two digits are transparency)
-BLANK='#00000000'
-CLEAR='#ffffff22'
-AQUA='#8be9fdcc'
-YELLOW='#f1fa8cbb'
-RED='#ff5555bb'
+# Clear any previous lock instances
+killall i3lock
 
-# Use the 'i3lock' command (which is your i3lock-color binary)
+# Run i3lock with modern, clean styling
 i3lock \
---insidever-color=$CLEAR     \
---ringver-color=$YELLOW      \
---insidewrong-color=$CLEAR   \
---ringwrong-color=$RED       \
---inside-color=$BLANK        \
---ring-color=$AQUA           \
---line-color=$BLANK          \
---separator-color=$AQUA      \
---verif-color=$AQUA          \
---wrong-color=$AQUA          \
---time-color=$AQUA           \
---date-color=$AQUA           \
---layout-color=$AQUA         \
---keyhl-color=$YELLOW        \
---bshl-color=$YELLOW         \
---screen=1                   \
---blur=7                     \
---clock                      \
---indicator                  \
---time-str="%H:%M:%S"        \
---date-str="%A, %m %Y"       \
---verif-text="Checking Face..." \
---wrong-text="Try Again" \
---no-unlock-indicator
+  --blur 5 \
+  --clock \
+  --indicator \
+  --time-str="%H:%M:%S" \
+  --date-str="%A, %Y-%m-%d" \
+  --insidever-color=00000000 \
+  --insidewrong-color=00000000 \
+  --inside-color=00000000 \
+  --ringver-color=b4befe \
+  --ringwrong-color=f38ba8 \
+  --ring-color=6c7086 \
+  --line-color=00000000 \
+  --keyhl-color=a6e3a1 \
+  --bshl-color=f38ba8 \
+  --text-color=cdd6f4 \
+  --time-color=cdd6f4 \
+  --date-color=bac2de \
+  --verif-text="Verifying..." \
+  --wrong-text="Wrong Password" \
+  --noinput-text="Empty"
