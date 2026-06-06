@@ -81,7 +81,7 @@ bindsym XF86KbdBrightnessUp exec --no-startup-id brightnessctl --device='asus::k
 bindsym XF86KbdBrightnessDown exec --no-startup-id brightnessctl --device='asus::kbd_backlight' set 1
 
 # Language Keyboard Distro Set-Up
-exec --no-startup-id setxkbmap -layout es,dk,gb -option grp:alt_shift_toggle
+bindsym --release Mod1+Shift exec --no-startup-id ~/.config/polybar/scripts/layout_menu.sh cycle
 
 # --- System & Window Management Shortcuts ---
 bindsym $mod+Shift+q kill
@@ -102,8 +102,7 @@ bindsym $mod+t exec thunderbird
 bindsym $mod+Shift+d exec --no-startup-id vesktop
 
 # Files & Productivity
-bindsym $mod+Shift+f exec --no-startup-id env EDITOR=nano kitty -e yazi
-#bindsym $mod+Shift+f exec nautilus ~/Documents
+bindsym $mod+Shift+f exec nautilus ~/Documents
 assign [class="Zotero"] 8
 bindsym $mod+Shift+z exec zotero
 bindsym $mod+c exec code -n
