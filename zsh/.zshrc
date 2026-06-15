@@ -172,3 +172,5 @@ function y() {
     rm -f -- "$tmp"
 }
 export EDITOR="nano"
+
+export PATH="/home/jesus/.pixi/bin:$PATH"
