@@ -174,3 +174,4 @@ function y() {
 export EDITOR="nano"
 
 export PATH="/home/jesus/.pixi/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
