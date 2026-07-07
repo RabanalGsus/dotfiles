@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Your interface names
-ETH_IFACE="enx644ed70d2189"
+# Your interface names - Updated for your G14 setup
+ETH_IFACE="eth0"
 WLAN_IFACE="wlp2s0"
 
 # Check Ethernet status

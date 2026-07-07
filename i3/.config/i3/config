@@ -102,8 +102,8 @@ bindsym $mod+t exec thunderbird
 bindsym $mod+Shift+d exec --no-startup-id vesktop
 
 # Files & Productivity
-bindsym $mod+Shift+f exec --no-startup-id env EDITOR=nano kitty -e yazi
-#bindsym $mod+Shift+f exec nautilus ~/Documents
+#bindsym $mod+Shift+f exec --no-startup-id env EDITOR=nano kitty -e yazi
+bindsym $mod+Shift+f exec nautilus ~/Documents
 assign [class="Zotero"] 8
 bindsym $mod+Shift+z exec zotero
 bindsym $mod+c exec code -n
